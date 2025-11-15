@@ -73,6 +73,5 @@ export const SEVERITY_OPTIONS = Object.entries(SEVERITY_LABELS).map(([value, lab
 }));
 
 // Use default for Jest tests, Vite will replace this at build time
-export const API_BASE_URL = 'http://localhost:5000/api';
-
+export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 export const DEBOUNCE_DELAY = 300; // milliseconds
