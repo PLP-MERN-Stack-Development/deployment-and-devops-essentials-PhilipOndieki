@@ -54,6 +54,11 @@ if (process.env.NODE_ENV !== 'test') {
   app.use(requestLogger);
 }
 
+// add a homepage Route
+app.get('/', (req, res) => {
+  res.json({ message: "BugTracker API is running 🚀" });
+});
+
 // Health Check Route
 app.get('/health', (req, res) => {
   res.status(200).json({
