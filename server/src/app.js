@@ -19,14 +19,32 @@ const app = express();
 // Security Middleware
 app.use(helmet());
 
-// CORS Configuration
+const allowedOrigins = [
+  'https://bug-tracker-zeta-pied.vercel.app',
+  'https://bug-tracker-git-main-philips-projects.vercel.app',
+  'http://localhost:3000',
+  'http://localhost:5173',
+];
+
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps, Postman, curl)
+    if (!origin) return callback(null, true);
+    
+    // Check if origin is in allowed list or matches Vercel preview pattern
+    if (allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
 };
+
 app.use(cors(corsOptions));
+
 
 // Rate Limiting
 const limiter = rateLimit({
