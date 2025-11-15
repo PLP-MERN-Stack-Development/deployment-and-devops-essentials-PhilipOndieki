@@ -1,8 +1,3 @@
-/**
- * Express Application Setup
- * Main application configuration
- */
-
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -13,11 +8,7 @@ const authRoutes = require('./routes/authRoutes');
 const requestLogger = require('./middleware/requestLogger');
 const { errorHandler, notFoundHandler } = require('./middleware/errorHandler');
 
-// Create Express app
 const app = express();
-
-// Security Middleware
-app.use(helmet());
 
 const corsOptions = {
   origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
@@ -26,40 +17,37 @@ const corsOptions = {
   credentials: true,
 };
 
-app.options('*', cors(corsOptions));
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // Handles preflight
 
-// Rate Limiting
+app.use(helmet());
+
 const limiter = rateLimit({
-  windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS, 10) || 15 * 60 * 1000, // 15 minutes
-  max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS, 10) || 100, // limit each IP to 100 requests per windowMs
+  windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS, 10) || 15 * 60 * 1000,
+  max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS, 10) || 100,
   message: 'Too many requests from this IP, please try again later.',
   standardHeaders: true,
   legacyHeaders: false,
 });
 
-// Apply rate limiting to all routes
 if (process.env.NODE_ENV !== 'test') {
   app.use(limiter);
 }
 
-// Body Parser Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Cookie Parser Middleware
 app.use(cookieParser());
 
-// Request Logging
 if (process.env.NODE_ENV !== 'test') {
   app.use(requestLogger);
 }
 
-// add a homepage Route
+const apiPrefix = process.env.API_PREFIX || '/api';
+
 app.get('/', (req, res) => {
   res.json({ message: "BugTracker API is running 🚀" });
 });
 
-// Health Check Route
 app.get('/health', (req, res) => {
   res.status(200).json({
     success: true,
@@ -68,15 +56,11 @@ app.get('/health', (req, res) => {
   });
 });
 
-// API Routes
-const apiPrefix = process.env.API_PREFIX || '/api';
 app.use(`${apiPrefix}/auth`, authRoutes);
 app.use(`${apiPrefix}/bugs`, bugRoutes);
 
-// 404 Handler
-app.use(notFoundHandler);
 
-// Global Error Handler
+app.use(notFoundHandler);
 app.use(errorHandler);
 
 module.exports = app;
