@@ -660,6 +660,12 @@ Currently, all authenticated users can:
 - Health Check: `/health`
 - URL: https://bugtracker-api.onrender.com
 
+**CI-CD screenshots**
+- Frontend
+![frontend](image-4.png)
+
+- Backend 
+![backend screeenshot](image-3.png)
 **Database (MongoDB Atlas):**
 - Cluster: Cloud-hosted MongoDB
 - Connection: Via MONGODB_URI environment variable
