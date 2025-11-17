@@ -13,7 +13,6 @@ A production-ready, full-stack bug tracking application built with the MERN stac
 - [Project Structure](#project-structure)
 - [API Documentation](#api-documentation)
 - [Authentication](#authentication)
-- [Testing](#testing)
 - [Deployment](#deployment)
 - [Environment Variables](#environment-variables)
 - [Contributing](#contributing)
@@ -838,7 +837,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 **Philip Ondieki**
 - Full-stack Developer specializing in MERN stack
-- 10+ years of experience
+- 2+ years of experience
 - Expert in TDD and production-ready applications
 - Based in Nairobi, Kenya
 
@@ -915,18 +914,9 @@ rm -rf node_modules package-lock.json
 npm install
 ```
 
-**Test Failures:**
-```bash
-# Run tests with verbose output
-npm test -- --verbose
-
-# Clear Jest cache
-npx jest --clearCache
-```
-
 ---
 
-**Built with ❤️ by Philip Ondieki**
+**Built with by Philip Ondieki**
 
 **Live Application:** https://bug-tracker-zeta-pied.vercel.app
 
