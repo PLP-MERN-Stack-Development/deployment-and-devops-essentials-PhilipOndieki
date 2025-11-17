@@ -45,7 +45,7 @@ jobs:
       run: npm test
       env:
         NODE_ENV: test
-        MONGODB_URI: mongodb+srv://philipbarongo30_db_user:BokrFDgcUNwrbYlK@cluster0.ofcxskj.mongodb.net/bug-tracker?appName=Cluster0
+        MONGODB_URI: mongodb://localhost:27017/bugtracker-test
         JWT_SECRET: test-secret-key-for-testing-only
     
     - name: Upload coverage to Codecov
@@ -109,3 +109,4 @@ jobs:
       run: |
         echo "✅ Backend deployment completed!"
         echo "API URL: https://bugtracker-api-8vr8.onrender.com/api"
+        echo "Health Check: https://bugtracker-api-8vr8.onrender.com/health"

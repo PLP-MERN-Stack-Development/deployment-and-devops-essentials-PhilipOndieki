@@ -112,7 +112,7 @@ jobs:
       run: |
         echo "🚀 Deploying frontend to Vercel..."
         echo "Vercel auto-deploys on push to main branch"
-        echo "Deployment URL: https://bug-tracker-zeta-pied.vercel.app/"
+        echo "Deployment URL: https://bug-tracker-zeta-pied.vercel.app"
     
     - name: Install Vercel CLI
       run: npm install -g vercel@latest
@@ -138,5 +138,5 @@ jobs:
     - name: Deployment success
       run: |
         echo "✅ Frontend deployment completed!"
-        echo "App URL: https://bug-tracker-zeta-pied.vercel.app/"
+        echo "App URL: https://bug-tracker-zeta-pied.vercel.app"
         echo "Note: If Vercel CLI deployment failed, Vercel GitHub integration will auto-deploy"
