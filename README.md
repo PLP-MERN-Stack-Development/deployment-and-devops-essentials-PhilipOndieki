@@ -262,10 +262,6 @@ server/
 │   │   └── validateBug.js       # Validation utilities
 │   ├── app.js                   # Express app setup
 │   └── server.js                # Server entry point
-├── tests/
-│   ├── unit/                    # Unit tests
-│   ├── integration/             # Integration tests
-│   └── setup.js                 # Test configuration
 ├── logs/                        # Application logs
 ├── .env.example                 # Environment template
 ├── package.json                 # Dependencies
